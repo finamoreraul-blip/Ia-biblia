@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LOGOS IA - Tu asistente cristiano</title>
+<title>LOGOS IA Sin Key</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d0d0d;color:#f2e9d8;font-family:Georgia,serif}
 header{position:sticky;top:0;background:#111;border-bottom:2px solid #f5d76e;padding:12px;text-align:center;z-index:10}
 header h1{color:#f5d76e;font-size:20px}
-header small{color:#aaa}
 .menu{display:flex;gap:6px;justify-content:center;margin-top:8px}
 .menu button{padding:9px 14px;border-radius:20px;border:1px solid #444;background:#1a1a1a;color:#fff;font-size:13px;cursor:pointer}
 .menu button.active{background:#f5d76e;color:#111;font-weight:800}
@@ -21,29 +20,28 @@ header small{color:#aaa}
 #barraLlena{height:100%;width:0%;background:#f5d76e}
 .chat{height:60vh;overflow-y:auto;background:#121212;border:1px solid #333;border-radius:14px;padding:12px;margin-top:10px}
 .msg{padding:12px 14px;border-radius:14px;margin-bottom:10px;line-height:1.6;font-size:15px}
-.msg.user{background:#1e3a2a;text-align:right;border-bottom-right-radius:4px}
-.msg.ia{background:#1c1c1c;border-left:3px solid #f5d76e;border-bottom-left-radius:4px}
+.msg.user{background:#1e3a2a;text-align:right}
+.msg.ia{background:#1c1c1c;border-left:3px solid #f5d76e}
 .msg.ia b{color:#f5d76e}
 .verso-card{background:#0f0f0f;border:1px solid #2a2a2a;border-radius:10px;padding:10px;margin:8px 0;cursor:pointer}
 .verso-card:hover{border-color:#f5d76e}
 .verso-card small{color:#f5d76e;font-weight:800}
 .input-area{display:flex;gap:8px;margin-top:10px}
-.input-area input{flex:1;padding:14px;border-radius:12px;border:1px solid #333;background:#1e1e1e;color:#fff;font-size:15px}
+.input-area input{flex:1;padding:14px;border-radius:12px;border:1px solid #333;background:#1e1e1e;color:#fff}
 .input-area button{padding:14px 20px;border-radius:12px;border:none;background:#f5d76e;font-weight:800;cursor:pointer}
 .sugerencias{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .sugerencias button{padding:8px 12px;border-radius:20px;border:1px solid #444;background:#1a1a1a;color:#ddd;font-size:13px;cursor:pointer}
-.sugerencias button:hover{border-color:#f5d76e;color:#f5d76e}
-.config{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:12px;margin-top:12px}
-.config input{width:100%;padding:12px;border-radius:10px;border:1px solid #333;background:#111;color:#fff;margin-top:6px}
 #modal{position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;border-top:2px solid #f5d76e;padding:16px;display:none;z-index:20;max-width:760px;margin:0 auto}
-#modal button{display:block;width:100%;margin-top:8px;padding:12px;border-radius:10px;border:none;background:#f5d76e;font-weight:800;cursor:pointer}
-#modal button.sec{background:#333;color:#fff}
+#modal button{width:100%;margin-top:8px;padding:12px;border-radius:10px;border:none;background:#f5d76e;font-weight:800;cursor:pointer}
+.palabra{border-bottom:2px dotted #f5d76e;color:#f5d76e;cursor:pointer;font-weight:700}
+#panelPalabra{margin-top:12px;background:#0f0f0f;border:1px solid #f5d76e;border-radius:12px;padding:12px;display:none}
+#panelPalabra h4{color:#f5d76e}
 </style>
 </head>
 <body>
 <header>
 <h1>✝️ LOGOS IA</h1>
-<small>RVR1960 como base. Estilo directo, con verdad.</small>
+<small>RVR1960. Sin API Key. Con memoria y estudio.</small>
 <div class="menu">
 <button class="active" onclick="mostrar('chat')">💬 Chat</button>
 <button onclick="mostrar('estudio')">📖 Estudio</button>
@@ -57,38 +55,31 @@ header small{color:#aaa}
 <div id="barra"><div id="barraLlena"></div></div>
 <small id="progreso"></small>
 </div>
-
-<div class="config">
-<b>🔑 API Key OpenAI (opcional, pero lo hace mucho más profundo)</b>
-<input id="apiKey" placeholder="sk-... pegá tu key acá, queda en tu navegador">
-<small style="color:#888">Sin key, LOGOS responde con la Biblia local. Con key, razona y aplica mejor.</small>
-</div>
-
 <div class="sugerencias">
-<button onclick="enviarSugerencia('Tengo mucha ansiedad y no puedo dormir')">😰 Ansiedad</button>
+<button onclick="enviarSugerencia('Hola')">👋 Hola</button>
+<button onclick="enviarSugerencia('Tengo mucha ansiedad y no duermo')">😰 Ansiedad</button>
 <button onclick="enviarSugerencia('Estoy mal con la plata, tengo deudas')">💸 Plata</button>
-<button onclick="enviarSugerencia('Me siento solo, nadie me entiende')">😔 Soledad</button>
-<button onclick="enviarSugerencia('Estudia Juan 3:16 a fondo')">📖 Estudia Juan 3:16</button>
-<button onclick="enviarSugerencia('No puedo perdonar a alguien que me hirió')">🙏 Perdonar</button>
-<button onclick="enviarSugerencia('Tengo miedo al futuro, qué me espera')">🔮 Futuro</button>
+<button onclick="enviarSugerencia('Me siento solo')">😔 Soledad</button>
+<button onclick="enviarSugerencia('No puedo perdonar a alguien')">🙏 Perdonar</button>
+<button onclick="enviarSugerencia('Estudia Juan 3:16')">📖 Juan 3:16</button>
+<button onclick="enviarSugerencia('Tengo miedo al futuro')">🔮 Futuro</button>
 </div>
-
 <div class="chat" id="chat">
-<div class="msg ia"><b>LOGOS IA</b><br>Hola hermano/a. Soy LOGOS, tu asistente cristiano.<br><br>Hablo claro, como un amigo, pero siempre con la Biblia en la mano. Reina-Valera 1960.<br><br>Contame qué te pasa o qué querés estudiar.</div>
+<div class="msg ia"><b>LOGOS IA</b><br>Hola hermano/a. Soy LOGOS, sin API Key.<br><br>Si decís Hola, te digo Hola. Si me contás tu problema, recuerdo el contexto y te acompaño.<br><br>Descargá la RVR1960 para empezar.</div>
 </div>
-
 <div class="input-area">
-<input id="input" placeholder="Escribí tu problema o cita: Juan 3:16, tengo miedo..." autocomplete="off">
+<input id="input" placeholder="Escribí... Hola, tengo miedo, etc">
 <button onclick="enviar()">Enviar</button>
 </div>
 </div>
 
 <div id="sec-estudio" class="seccion">
-<h2 style="color:#f5d76e">📖 Modo Estudio Profundo</h2>
-<p style="color:#aaa;margin-top:6px">Pegá una cita y LOGOS te la desglosa como se estudia en seminario, pero simple.</p>
-<input id="estudioInput" placeholder="Ej: Salmos 23:1, Romanos 8:28, Génesis 1:1">
-<button style="width:100%;margin-top:8px;padding:14px;border-radius:99px;border:none;background:#f5d76e;font-weight:800;cursor:pointer" onclick="hacerEstudio()">ESTUDIAR ESTA CITA</button>
+<h2 style="color:#f5d76e">📖 Estudio Profundo</h2>
+<p style="color:#aaa;margin-top:6px">Pegá una cita. Cada palabra es clicable. Sinónimos con significado incluidos.</p>
+<input id="estudioInput" placeholder="Ej: Salmos 23:1, Romanos 8:28, Filipenses 4:19" style="width:100%;padding:14px;border-radius:12px;border:1px solid #333;background:#1e1e1e;color:#fff;margin-top:8px">
+<button style="width:100%;margin-top:8px;padding:14px;border-radius:99px;border:none;background:#f5d76e;font-weight:800;cursor:pointer" onclick="hacerEstudio()">ESTUDIAR</button>
 <div id="resultadoEstudio"></div>
+<div id="panelPalabra"></div>
 </div>
 
 <div id="modal">
@@ -98,246 +89,577 @@ header small{color:#aaa}
 </div>
 
 <script>
-const NOMBRES = ["Génesis","Éxodo","Levítico","Números","Deuteronomio","Josué","Jueces","Rut","1 Samuel","2 Samuel","1 Reyes","2 Reyes","1 Crónicas","2 Crónicas","Esdras","Nehemías","Ester","Job","Salmos","Proverbios","Eclesiastés","Cantares","Isaías","Jeremías","Lamentaciones","Ezequiel","Daniel","Oseas","Joel","Amós","Abdías","Jonás","Miqueas","Nahum","Habacuc","Sofonías","Hageo","Zacarías","Malaquías","Mateo","Marcos","Lucas","Juan","Hechos","Romanos","1 Corintios","2 Corintios","Gálatas","Efesios","Filipenses","Colosenses","1 Tesalonicenses","2 Tesalonicenses","1 Timoteo","2 Timoteo","Tito","Filemón","Hebreos","Santiago","1 Pedro","2 Pedro","1 Juan","2 Juan","3 Juan","Judas","Apocalipsis"];
-
-let estructuraLibros=[];
+const NOMBRES=["Génesis","Éxodo","Levítico","Números","Deuteronomio","Josué","Jueces","Rut","1 Samuel","2 Samuel","1 Reyes","2 Reyes","1 Crónicas","2 Crónicas","Esdras","Nehemías","Ester","Job","Salmos","Proverbios","Eclesiastés","Cantares","Isaías","Jeremías","Lamentaciones","Ezequiel","Daniel","Oseas","Joel","Amós","Abdías","Jonás","Miqueas","Nahum","Habacuc","Sofonías","Hageo","Zacarías","Malaquías","Mateo","Marcos","Lucas","Juan","Hechos","Romanos","1 Corintios","2 Corintios","Gálatas","Efesios","Filipenses","Colosenses","1 Tesalonicenses","2 Tesalonicenses","1 Timoteo","2 Timoteo","Tito","Filemón","Hebreos","Santiago","1 Pedro","2 Pedro","1 Juan","2 Juan","3 Juan","Judas","Apocalipsis"];
 let todosLosVersiculos=[];
-let currentVerses=[];
+let conversacion=[];
+let ultimoTema=null;
 
-const TEMAS = {
-  ansiedad: {p:['ansied','miedo','temor','preocup','nervio','estres','angust','panico','dormir','inquiet'], vers:['Filipenses 4:6','1 Pedro 5:7','Isaías 41:10','Salmos 94:19','Mateo 6:34']},
-  economia: {p:['plata','econom','deuda','trabajo','sueldo','pobre','falta','proveer','desempleo','finanza'], vers:['Filipenses 4:19','Mateo 6:33','Proverbios 3:9','Malaquías 3:10','2 Corintios 9:8']},
-  tristeza: {p:['triste','llanto','dolor','depre','solo','abandon','llorar','quebrant','desanimo'], vers:['Salmos 34:18','Salmos 42:11','Isaías 61:3','Salmos 147:3','2 Corintios 1:3']},
-  familia: {p:['familia','hijo','esposa','marido','padre','madre','hermano','casa','matrimonio'], vers:['Josué 24:15','Salmos 133:1','Proverbios 22:6','Efesios 5:25','Colosenses 3:20']},
-  perdon: {p:['perdon','culpa','pecado','fallé','arrepent','herida','hirieron'], vers:['1 Juan 1:9','Salmos 51:10','Isaías 1:18','Mateo 6:14','Efesios 4:32']},
-  fe: {p:['fe','duda','creer','incredul'], vers:['Hebreos 11:1','Romanos 10:17','Marcos 9:24','Santiago 1:6']},
-  oracion: {p:['oracion','orar','clamar','pedir a dios'], vers:['Mateo 7:7','Filipenses 4:6','1 Tesalonicenses 5:17','Santiago 5:16']},
-  tentacion: {p:['tentacion','pecar','caer','lujuria','adiccion','droga','alcohol'], vers:['1 Corintios 10:13','Santiago 4:7','Romanos 6:12','Gálatas 5:16']},
-  proposito: {p:['proposito','futuro','plan','llamado','vocacion','para que estoy'], vers:['Jeremías 29:11','Romanos 8:28','Proverbios 3:5','Efesios 2:10']},
-  salud: {p:['enferm','salud','cuerpo','cancer','operacion','curar','sanar','dolor fisico'], vers:['Isaías 53:5','Santiago 5:14','Salmos 41:3','Jeremías 30:17']},
-  amor: {p:['amor','soledad','pareja','novia','novio','matrimonio','relacion'], vers:['Juan 3:16','1 Corintios 13:4','Romanos 8:38','1 Juan 4:19']},
-  muerte: {p:['muerte','murio','fallecio','funeral','cielo'], vers:['Juan 11:25','Salmos 23:4','1 Corintios 15:55','Apocalipsis 21:4']},
-  agradecimiento: {p:['gracias','bendicion','alegria','gozo','feliz'], vers:['1 Tesalonicenses 5:18','Salmos 100:4','Filipenses 4:4','Salmos 118:24']}
+const TEMAS={
+ansiedad:{p:['ansied','miedo','temor','preocup','nervio','estres','angust','panico','inquiet','fobia'],vers:['Filipenses 4:6','1 Pedro 5:7','Isaías 41:10','Salmos 94:19','Mateo 6:34']},
+economia:{p:['plata','econom','deuda','sueldo','pobre','falta','proveer','desempleo','finanza','factura','alquiler','dinero','riqueza','ahorro','gasto','inversion','banco','prestamo'],vers:['Filipenses 4:19','Mateo 6:33','Proverbios 3:9','Malaquías 3:10','2 Corintios 9:8']},
+tristeza:{p:['triste','llanto','dolor','depre','solo','abandon','llorar','quebrant','desanimo','vacío','afliccion','pena'],vers:['Salmos 34:18','Salmos 42:11','Isaías 61:3','Salmos 147:3','2 Corintios 1:3']},
+familia:{p:['familia','hijo','esposa','marido','padre','madre','hermano','casa','matrimonio','padres','abuelo','abuela','tio','tia','primo','prima','familia'],vers:['Josué 24:15','Salmos 133:1','Proverbios 22:6','Efesios 5:25','Colosenses 3:20']},
+perdon:{p:['perdon','culpa','pecado','arrepent','herida','hirieron','ofensa','remordimiento'],vers:['1 Juan 1:9','Salmos 51:10','Isaías 1:18','Mateo 6:14','Efesios 4:32']},
+fe:{p:['fe','duda','creer','confianza','seguridad'],vers:['Hebreos 11:1','Romanos 10:17','Marcos 9:24','Santiago 1:6','Hebreos 11:6']},
+oracion:{p:['oracion','orar','clamar','pedir a dios','rezar','suplica','intercesion','plegaria'],vers:['Mateo 7:7','Filipenses 4:6','1 Tesalonicenses 5:17','Santiago 5:16','Jeremías 33:3']},
+tentacion:{p:['tentacion','pecar','caer','lujuria','adiccion','droga','alcohol','porno','vicio','impuro'],vers:['1 Corintios 10:13','Santiago 4:7','Romanos 6:12','Gálatas 5:16','1 Juan 2:16']},
+proposito:{p:['proposito','futuro','plan','llamado','vocacion','destino','vision'],vers:['Jeremías 29:11','Romanos 8:28','Proverbios 3:5','Efesios 2:10','Filipenses 1:6']},
+salud:{p:['enferm','salud','cuerpo','cancer','operacion','curar','sanar','dolor fisico','dolencia','fiebre','diabetes','cabeza','espalda','brazo','pierna'],vers:['Isaías 53:5','Santiago 5:14','Salmos 41:3','Jeremías 30:17','Proverbios 17:22']},
+amor:{p:['amor','soledad','pareja','novia','novio','relacion','querer','noviazgo'],vers:['Juan 3:16','1 Corintios 13:4','Romanos 8:38','1 Juan 4:19','Juan 15:13']},
+muerte:{p:['muerte','murio','fallecio','funeral','cielo','se murio','partida','cementerio','difunto'],vers:['Juan 11:25','Salmos 23:4','1 Corintios 15:55','Apocalipsis 21:4','Juan 14:2']},
+trabajo:{p:['trabajo','laburo','empleo','jefe','oficina','negocio','despido','chamba','cargo','profesion','empresa','empleado','compañero'],vers:['Colosenses 3:23','Proverbios 16:3','Eclesiastés 9:10','Deuteronomio 8:18','2 Tesalonicenses 3:10']},
+matrimonio:{p:['matrimonio','esposo','esposa','casado','casamiento','divorcio','conyuge','marido','mujer','boda'],vers:['Efesios 5:25','Proverbios 18:22','Génesis 2:24','Hebreos 13:4','1 Pedro 3:7']},
+hijos:{p:['hijos','nino','niño','bebe','bebé','adolescente','criar','crianza','joven','embarazo','niña'],vers:['Proverbios 22:6','Salmos 127:3','Efesios 6:4','Deuteronomio 6:7','Proverbios 29:17']},
+ira:{p:['ira','enojo','enojado','rabia','furia','discusion','pelea','grito','violencia','abuso'],vers:['Efesios 4:26','Proverbios 15:1','Santiago 1:19','Proverbios 19:11','Colosenses 3:8']},
+cansancio:{p:['cansado','cansancio','agotado','fatiga','rendido','sin fuerzas','debil','dormir','insomnio','sueno','pesadilla'],vers:['Mateo 11:28','Isaías 40:31','Salmos 4:8','Éxodo 33:14','Marcos 6:31']},
+decision:{p:['decision','decidir','no se que hacer','eleccion','elegir','camino','dudo','orientacion','estudio','examen','universidad','escuela','colegio'],vers:['Proverbios 3:5','Santiago 1:5','Salmos 32:8','Isaías 30:21','Josué 1:9']},
+iglesia:{p:['iglesia','congregacion','hermanos','pastor','culto','servir','ministerio','misionero','evangelista','profeta','apostol','maestro'],vers:['Hebreos 10:25','Hechos 2:42','Efesios 4:11','1 Pedro 2:9','Mateo 16:18']},
+gratitud:{p:['gracias','bendicion','alegria','gozo','feliz','agradecido','alabanza','adoracion'],vers:['1 Tesalonicenses 5:18','Salmos 100:4','Filipenses 4:4','Salmos 118:24','Salmos 103:2']},
+esperanza:{p:['esperanza','futuro','confianza','promesa','anhelo'],vers:['Romanos 15:13','Jeremías 29:11','Salmos 42:5','Lamentaciones 3:24','Hebreos 6:19']},
+justicia:{p:['justicia','injusticia','opresion','derecho','equidad','ley','juez'],vers:['Miqueas 6:8','Proverbios 21:15','Isaías 1:17','Salmos 37:28','Deuteronomio 16:20']},
+guerra:{p:['guerra','conflicto','pelea','batalla','enemigo','lucha','arma'],vers:['2 Crónicas 20:15','Éxodo 14:14','Salmos 144:1','Efesios 6:12','Deuteronomio 20:4']},
+paz:{p:['paz','tranquilidad','serenidad','calma','shalom'],vers:['Juan 14:27','Filipenses 4:7','Isaías 26:3','Salmos 29:11','Romanos 5:1']},
+prosperidad:{p:['prosper','bendecir','abundancia','exito','crecer','avanzar'],vers:['Josué 1:8','Salmos 1:3','3 Juan 1:2','Proverbios 10:22','Deuteronomio 28:2']},
+deuda:{p:['deuda','debo','acreedor','prestamo','pagar','tarjeta','credito'],vers:['Romanos 13:8','Proverbios 22:7','Salmos 37:21','Mateo 6:12','Deuteronomio 15:2']},
+generosidad:{p:['generos','dar','ofrenda','diezmo','compartir','donar','ayudar'],vers:['2 Corintios 9:7','Hechos 20:35','Proverbios 11:25','Lucas 6:38','1 Timoteo 6:18']},
+contentamiento:{p:['contento','satisfecho','conforme','suficiente','paz interior'],vers:['Filipenses 4:11','1 Timoteo 6:6','Hebreos 13:5','Proverbios 15:16','Salmos 23:1']},
+humildad:{p:['humild','sencillo','modesto','bajar','humilde'],vers:['Santiago 4:10','1 Pedro 5:6','Proverbios 22:4','Mateo 23:12','Filipenses 2:3']},
+orgullo:{p:['orgullo','soberbia','vanidad','altivo','arrogante','vanidoso'],vers:['Proverbios 16:18','Santiago 4:6','Proverbios 11:2','1 Juan 2:16','Daniel 4:37']},
+sabiduria:{p:['sabid','sabio','entendimiento','conocimiento','inteligente','profesor','estudiante','libro','lectura'],vers:['Proverbios 3:5','Santiago 1:5','Proverbios 9:10','Colosenses 2:3','Eclesiastés 7:12']},
+paciencia:{p:['paciencia','esperar','tolerar','aguantar','lento','calma'],vers:['Santiago 5:7','Romanos 12:12','Salmos 40:1','Lamentaciones 3:26','Gálatas 5:22']},
+bondad:{p:['bondad','bueno','amable','benigno','caridad'],vers:['Salmos 23:6','Gálatas 5:22','Efesios 4:32','Proverbios 19:22','Romanos 2:4']},
+mansedumbre:{p:['manso','mansedumbre','suave','humilde','docil'],vers:['Mateo 5:5','Números 12:3','Santiago 3:13','Gálatas 5:23','Salmos 37:11']},
+templanza:{p:['templanza','dominio propio','control','moderacion','disciplina'],vers:['Gálatas 5:23','2 Pedro 1:6','Proverbios 25:28','1 Corintios 9:25','Tito 2:12']},
+fidelidad:{p:['fiel','fidelidad','leal','constante','verdadero'],vers:['Lamentaciones 3:22','1 Corintios 4:2','Apocalipsis 2:10','Proverbios 20:6','Salmos 36:5']},
+santidad:{p:['santo','santidad','apartado','consagrado','puro','limpio'],vers:['1 Pedro 1:16','Hebreos 12:14','Levítico 19:2','Romanos 12:1','2 Corintios 7:1']},
+obediencia:{p:['obedec','obediencia','escuchar a dios','someterse','cumplir','mandamiento'],vers:['Juan 14:15','1 Samuel 15:22','Romanos 6:16','Hechos 5:29','Deuteronomio 28:1']},
+arrepentimiento:{p:['arrepent','volverse a dios','cambiar','confesar','conversion','vuelta'],vers:['Hechos 3:19','Lucas 15:7','2 Corintios 7:10','Salmos 51:17','Apocalipsis 2:5']},
+salvacion:{p:['salvacion','salvar','salvo','redimir','vida eterna','cristo','jesus'],vers:['Juan 3:16','Romanos 10:9','Efesios 2:8','Hechos 16:31','Tito 3:5']},
+gracia:{p:['gracia','favor','regalo de dios','inmerecido'],vers:['Efesios 2:8','Romanos 5:17','2 Corintios 12:9','Juan 1:16','Hebreos 4:16']},
+misericordia:{p:['misericordia','compasion','piedad','perdon','clemencia'],vers:['Lamentaciones 3:22','Mateo 5:7','Salmos 103:8','Miqueas 6:8','Efesios 2:4']},
+adoracion:{p:['adorar','adoracion','alabar','culto','honrar','gloria'],vers:['Juan 4:24','Salmos 95:6','Apocalipsis 4:11','Salmos 29:2','Romanos 12:1']},
+ayuno:{p:['ayuno','ayunar','abstinencia','buscar a dios'],vers:['Mateo 6:16','Isaías 58:6','Hechos 13:2','Joel 2:12','Esdras 8:23']},
+servicio:{p:['servir','servicio','ministrar','ayudar','diacono','voluntario'],vers:['Marcos 10:45','Gálatas 5:13','Colosenses 3:24','Romanos 12:11','Josué 24:15']},
+evangelismo:{p:['evangelio','predicar','mision','testimonio','ganar almas','hablar de jesus'],vers:['Marcos 16:15','Mateo 28:19','Romanos 1:16','Hechos 1:8','1 Pedro 3:15']},
+comunion:{p:['comunion','comunión','fellowship','participacion','compartir','cena del señor'],vers:['Hechos 2:42','1 Juan 1:7','Filipenses 2:1','1 Corintios 10:16','Salmos 133:1']},
+unidad:{p:['unidad','unidos','juntos','armonia','acuerdo','paz entre hermanos'],vers:['Salmos 133:1','Juan 17:21','Efesios 4:3','Filipenses 2:2','1 Corintios 1:10']},
+reconciliacion:{p:['reconcili','restaurar relacion','volver','unir','paz con dios'],vers:['2 Corintios 5:18','Romanos 5:10','Colosenses 1:20','Mateo 5:24','Efesios 2:16']},
+restauracion:{p:['restaurar','restauracion','volver a empezar','rehacer','sanar heridas'],vers:['Joel 2:25','Salmos 51:12','Isaías 61:7','Jeremías 30:17','Job 42:10']},
+sanidad:{p:['sanidad','sanar','curar','milagro salud','restaurar salud','enfermedad'],vers:['Isaías 53:5','Santiago 5:14','Jeremías 17:14','Salmos 147:3','Mateo 10:1']},
+milagro:{p:['milagro','prodigio','maravilla','senal','poder de dios','imposible'],vers:['Marcos 10:27','Jeremías 32:17','Salmos 77:14','Hechos 2:22','Juan 11:40']},
+poder:{p:['poder','potencia','fuerza','autoridad','poderoso','omnipotente'],vers:['Hechos 1:8','Filipenses 4:13','2 Timoteo 1:7','Salmos 62:11','Efesios 3:20']},
+proteccion:{p:['proteccion','proteger','guardar','refugio','amparo','cuidado'],vers:['Salmos 91:1','Proverbios 18:10','Isaías 54:17','2 Tesalonicenses 3:3','Salmos 121:7']},
+guia:{p:['guia','guiar','direccion','orientar','mostrar camino','consejo'],vers:['Salmos 32:8','Proverbios 3:6','Isaías 58:11','Salmos 48:14','Juan 16:13']},
+consuelo:{p:['consuelo','consolar','alentar','animar','confort','abrazar'],vers:['Isaías 41:10','2 Corintios 1:3','Salmos 23:4','Mateo 5:4','1 Tesalonicenses 4:18']},
+fortaleza:{p:['fortaleza','fuerza','fuerte','valor','poder','animo'],vers:['Josué 1:9','Isaías 41:10','Filipenses 4:13','Salmos 28:7','Efesios 6:10']},
+valentia:{p:['valiente','coraje','animo','osado','esforzado','esfuerzo'],vers:['Josué 1:9','1 Corintios 16:13','Deuteronomio 31:6','Salmos 27:1','Hechos 4:31']},
+libertad:{p:['libertad','libre','liberar','independencia','romper cadenas','preso'],vers:['Juan 8:36','Gálatas 5:1','Romanos 8:21','2 Corintios 3:17','Salmos 119:45']},
+victoria:{p:['victoria','vencer','ganar','triunfo','conquistar','campeon'],vers:['1 Corintios 15:57','Romanos 8:37','Apocalipsis 21:7','1 Juan 5:4','Deuteronomio 20:4']},
+alegria:{p:['alegria','gozo','feliz','contento','júbilo','fiesta','celebracion','cumpleaños','navidad'],vers:['Nehemías 8:10','Salmos 16:11','Filipenses 4:4','Juan 15:11','Salmos 100:1']},
+afliccion:{p:['afliccion','sufrimiento','prueba','tribulacion','dolor','angustia'],vers:['Romanos 5:3','2 Corintios 4:17','Santiago 1:2','1 Pedro 4:12','Salmos 34:19']},
+persecucion:{p:['persecucion','perseguido','atacado','por causa de cristo','injusticia'],vers:['Mateo 5:10','2 Timoteo 3:12','Hechos 7:60','Romanos 8:35','1 Pedro 4:14']},
+sufrimiento:{p:['sufrimiento','padecer','dolor','agonia','tribulacion','llanto'],vers:['Romanos 8:18','1 Pedro 5:10','2 Corintios 12:9','Filipenses 3:10','Salmos 22:24']},
+soledad:{p:['solo','sola','nadie me quiere','aislado','abandonado','amigo','amistad','vecino'],vers:['Deuteronomio 31:6','Hebreos 13:5','Salmos 27:10','Isaías 41:10','Mateo 28:20']},
+abandono:{p:['abandon','dejado','rechazado','olvidado','desamparado','traicion','decepcion'],vers:['Isaías 49:15','Salmos 27:10','Hebreos 13:5','Deuteronomio 31:6','2 Corintios 4:9']},
+verguenza:{p:['verguenza','vergüenza','humillado','deshonra','culpa','pecado'],vers:['Romanos 10:11','Salmos 34:5','Isaías 54:4','Filipenses 3:19','1 Pedro 2:6']},
+culpa:{p:['culpa','condenado','acusado','pecado','remordimiento','error'],vers:['Romanos 8:1','1 Juan 1:9','Salmos 32:5','Isaías 1:18','Miqueas 7:19']},
+enemistad:{p:['enemigo','enemistad','odio','rival','perseguidor','robo','violencia'],vers:['Mateo 5:44','Romanos 12:20','Salmos 27:2','Proverbios 25:21','Lucas 6:27']},
+bendicion:{p:['bendicion','bendito','favorecido','prospero','dichoso','suerte'],vers:['Números 6:24','Salmos 1:1','Efesios 1:3','Deuteronomio 28:6','Proverbios 10:22']},
+escuela:{p:['escuela','colegio','universidad','estudio','examen','tarea','profesor','alumno','clase','nota'],vers:['Proverbios 1:7','Daniel 1:17','Santiago 1:5','Colosenses 3:23','Eclesiastés 12:12']},
+viaje:{p:['viaje','vacaciones','auto','moto','avion','colectivo','ruta','camino','mudanza'],vers:['Salmos 121:8','Proverbios 3:6','Génesis 28:15','Hechos 17:28','Josué 1:9']},
+hogar:{p:['hogar','casa','cocina','comida','habitacion','living','departamento','alquiler'],vers:['Josué 24:15','Salmos 127:1','Proverbios 24:3','Hechos 16:31','1 Timoteo 3:5']},
+comida:{p:['comida','hambre','sed','agua','pan','fruta','carne','cena','almuerzo','desayuno','bebida','vino','cafe'],vers:['Mateo 6:11','Salmos 104:14','Filipenses 4:19','Deuteronomio 8:3','Juan 6:35']},
+naturaleza:{p:['naturaleza','arbol','flor','jardin','planta','rio','mar','montaña','campo','tierra','cielo','sol','luna','estrella','lluvia','tormenta','viento','nieve'],vers:['Salmos 19:1','Génesis 1:1','Romanos 1:20','Salmos 104:24','Isaías 55:12']},
+animal:{p:['animal','perro','gato','pajaro','pez','vaca','caballo','oveja','leon'],vers:['Génesis 1:25','Proverbios 12:10','Salmos 50:10','Mateo 10:29','Job 12:7']},
+deporte:{p:['deporte','futbol','carrera','juego','equipo','entrenar','gimnasio','musica','arte','pintura'],vers:['1 Corintios 9:24','Filipenses 3:14','Colosenses 3:23','Salmos 144:1','Eclesiastés 9:10']},
+biblia:{p:['biblia','escritura','palabra','versiculo','salmo','proverbio','evangelio'],vers:['2 Timoteo 3:16','Salmos 119:105','Hebreos 4:12','Josué 1:8','Romanos 15:4']},
+corazonroto:{p:['corazon roto','decepcion','desilusion','traicion','mentira','engano','falso'],vers:['Salmos 147:3','Proverbios 13:12','Salmos 34:18','Jeremías 17:9','Proverbios 12:22']},
+verdad:{p:['verdad','mentira','honestidad','sincero','realidad'],vers:['Juan 14:6','Salmos 119:160','Proverbios 12:19','Juan 8:32','Efesios 4:25']},
+accidente:{p:['accidente','desastre','terremoto','inundacion','fuego','tormenta','caida','choque'],vers:['Salmos 91:11','Isaías 41:10','Salmos 46:1','Romanos 8:28','Proverbios 3:5']},
+demonio:{p:['demonio','satanas','diablo','espiritu malo','maligno','posesion'],vers:['Santiago 4:7','1 Pedro 5:8','Efesios 6:11','Lucas 10:19','Hechos 16:18']},
+angel:{p:['angel','ángel','mensajero','querubin','serafin','protector celestial'],vers:['Salmos 91:11','Hebreos 1:14','Mateo 4:11','Lucas 2:13','Apocalipsis 5:11']},
+espiritu:{p:['espiritu','espíritu','alma','mente','pensamiento','voluntad','emocion','sentimiento'],vers:['Juan 4:24','Romanos 8:16','Gálatas 5:22','Filipenses 4:7','Salmos 51:10']},
+cuerpo:{p:['cuerpo','mente','salud','cabeza','brazo','pierna','ojo','oido','piel','hueso'],vers:['1 Corintios 6:19','Romanos 12:1','Salmos 139:14','3 Juan 1:2','Proverbios 17:22']},
+joven:{p:['joven','adolescente','jovencita','muchacho','universitario','estudiante'],vers:['1 Timoteo 4:12','Eclesiastés 11:9','Salmos 119:9','Proverbios 20:29','Tito 2:6']},
+anciano:{p:['anciano','viejo','abuelo','abuela','jubilado','sabio mayor'],vers:['Proverbios 16:31','Job 12:12','Salmos 92:14','Tito 2:2','Levítico 19:32']},
+boda:{p:['boda','casamiento','novio','novia','matrimonio','fiesta','celebracion'],vers:['Génesis 2:24','Salmos 128:3','Efesios 5:25','Proverbios 18:22','Juan 2:1']},
+embarazo:{p:['embarazo','embarazada','bebé','bebe','nacimiento','madre'],vers:['Salmos 139:13','Jeremías 1:5','Salmos 127:3','Isaías 66:9','Lucas 1:41']},
+politica:{p:['politica','gobierno','presidente','ley','corrupcion','nacion','pais','gobernante'],vers:['Romanos 13:1','1 Timoteo 2:2','Proverbios 29:2','Daniel 2:21','Salmos 33:12']},
+tecnologia:{p:['tecnologia','celular','internet','redes sociales','computadora','telefono','whatsapp'],vers:['Eclesiastés 7:29','Proverbios 4:23','Filipenses 4:8','Colosenses 3:2','Salmos 101:3']},
+clima:{p:['clima','lluvia','sol','nieve','viento','tormenta','calor','frio','sequia'],vers:['Mateo 5:45','Salmos 148:8','Job 37:6','Génesis 8:22','Eclesiastés 3:1']},
+trabajo2:{p:['cocina','limpieza','orden','organizar','planificar','proyecto'],vers:['Proverbios 16:3','Colosenses 3:23','Lucas 14:28','Proverbios 21:5','Eclesiastés 9:10']}
+};
+
+const DICC={
+"dios":{def:"Ser supremo, creador de todo.",sin:["señor","todopoderoso","creador","padre","eterno"]},
+"señor":{def:"Dueño y autoridad máxima.",sin:["amo","rey","soberano","dios"]},
+"jesus":{def:"Salvador, Dios hecho hombre.",sin:["cristo","salvador","mesías"]},
+"cristo":{def:"El Mesías, el Ungido.",sin:["jesús","salvador"]},
+"padre":{def:"Dios como Padre amoroso.",sin:["creador","señor"]},
+"hijo":{def:"Jesucristo, Hijo de Dios.",sin:["jesús","cristo"]},
+"espiritu":{def:"Presencia viva de Dios en nosotros.",sin:["consolador","espíritu santo"]},
+"angel":{def:"Mensajero de Dios.",sin:["mensajero","ser celestial"]},
+"cielo":{def:"Morada de Dios, eternidad.",sin:["paraíso","gloria"]},
+"tierra":{def:"Mundo creado por Dios.",sin:["mundo","planeta","suelo"]},
+"amor":{def:"Amor que da sin esperar nada.",sin:["caridad","afecto","bondad"]},
+"fe":{def:"Confianza firme en Dios.",sin:["confianza","creencia","seguridad"]},
+"esperanza":{def:"Confianza segura en la promesa de Dios.",sin:["confianza","certeza"]},
+"paz":{def:"Tranquilidad completa de Dios.",sin:["tranquilidad","serenidad","calma"]},
+"gozo":{def:"Alegría profunda en Dios.",sin:["alegría","júbilo","felicidad"]},
+"alegria":{def:"Gozo y contentamiento.",sin:["gozo","júbilo","felicidad"]},
+"gracia":{def:"Favor de Dios que no merecemos.",sin:["favor","bondad","regalo"]},
+"misericordia":{def:"Compasión que perdona y ayuda.",sin:["compasión","piedad","clemencia"]},
+"perdon":{def:"Remisión de la culpa.",sin:["absolución","liberación"]},
+"perdonar":{def:"Soltar la ofensa.",sin:["absolver","liberar"]},
+"pecado":{def:"Falla contra Dios.",sin:["falta","transgresión","iniquidad"]},
+"santidad":{def:"Apartado para Dios, puro.",sin:["pureza","consagración"]},
+"justicia":{def:"Lo recto delante de Dios.",sin:["rectitud","equidad"]},
+"salvacion":{def:"Rescate de Dios.",sin:["rescate","liberación","vida eterna"]},
+"redencion":{def:"Compra de nuestra libertad por Cristo.",sin:["rescate","salvación"]},
+"vida":{def:"Vida plena que viene de Dios.",sin:["existencia","aliento"]},
+"verdad":{def:"Realidad de Dios, sin mentira.",sin:["certeza","honestidad"]},
+"luz":{def:"Presencia de Dios que disipa oscuridad.",sin:["claridad","resplandor"]},
+"tinieblas":{def:"Oscuridad, separación de Dios.",sin:["oscuridad","sombras"]},
+"fuerza":{def:"Poder para sostener y vencer.",sin:["poder","fortaleza","vigor"]},
+"corazon":{def:"Centro de pensamientos y voluntad.",sin:["alma","interior","mente"]},
+"alma":{def:"Vida interior, persona completa.",sin:["espíritu","ser"]},
+"palabra":{def:"Lo que Dios habla.",sin:["mensaje","verbo","escritura"]},
+"camino":{def:"Dirección, estilo de vida, Jesús mismo.",sin:["ruta","sendero"]},
+"oracion":{def:"Conversación con Dios.",sin:["plegaria","súplica","clamor"]},
+"familia":{def:"Núcleo creado por Dios.",sin:["casa","hogar","parentela"]},
+"trabajo":{def:"Labor, servicio a Dios y al prójimo.",sin:["empleo","oficio","tarea"]},
+"dinero":{def:"Recurso, no debe ser amo.",sin:["plata","riqueza","bienes"]},
+"miedo":{def:"Temor que Dios nos manda a soltar.",sin:["temor","angustia","pánico"]},
+"temor":{def:"Reverencia a Dios y también miedo.",sin:["miedo","reverencia"]},
+"futuro":{def:"Lo que viene, en manos de Dios.",sin:["porvenir","destino"]},
+"pasado":{def:"Lo que ya fue, Dios lo redime.",sin:["ayer","historia"]},
+"presente":{def:"El ahora, regalo de Dios.",sin:["hoy","ahora"]},
+"agua":{def:"Símbolo de vida y purificación.",sin:["líquido","manantial","río"]},
+"fuego":{def:"Juicio y también presencia de Dios.",sin:["llama","brasas"]},
+"pan":{def:"Alimento, Jesús como pan de vida.",sin:["alimento","comida","sustento"]},
+"sal":{def:"Lo que da sabor y preserva.",sin:["condimento","sabor"]},
+"vino":{def:"Gozo y celebración, también sangre de Cristo.",sin:["bebida","jugo"]},
+"cruz":{def:"Sacrificio de Jesús por nosotros.",sin:["madero","sacrificio"]},
+"sangre":{def:"Vida entregada para perdón.",sin:["vida","sacrificio"]},
+"iglesia":{def:"Pueblo de Dios, cuerpo de Cristo.",sin:["congregación","comunidad"]},
+"pastor":{def:"El que guía y cuida las ovejas.",sin:["líder","guía"]},
+"apostol":{def:"Enviado con autoridad.",sin:["misionero","enviado"]},
+"profeta":{def:"El que habla palabra de Dios.",sin:["mensajero","vidente"]},
+"rey":{def:"Gobernante, Cristo es Rey de reyes.",sin:["monarca","soberano"]},
+"siervo":{def:"El que sirve a Dios y a otros.",sin:["servidor","ministro"]},
+"hermano":{def:"Miembro de la familia de Dios.",sin:["prójimo","consanguíneo"]},
+"amigo":{def:"Compañero cercano y leal.",sin:["camarada","confidente"]},
+"enemigo":{def:"Adversario, también Satanás.",sin:["adversario","oponente"]},
+"demonio":{def:"Ser maligno opuesto a Dios.",sin:["diablo","satanás"]},
+"satanas":{def:"El acusador, enemigo de Dios.",sin:["diablo","tentador"]},
+"mundo":{def:"Sistema y creación.",sin:["tierra","humanidad"]},
+"pecador":{def:"El que falla contra Dios.",sin:["culpable","transgresor"]},
+"santo":{def:"Apartado para Dios.",sin:["consagrado","puro","bendito"]},
+"bendicion":{def:"Favor y bien de Dios.",sin:["bendito","gracia","favor"]},
+"maldicion":{def:"Separación del favor de Dios.",sin:["castigo","juicio"]},
+"ley":{def:"Instrucción de Dios.",sin:["mandamiento","norma"]},
+"mandamiento":{def:"Orden de Dios.",sin:["precepto","ley"]},
+"pacto":{def:"Acuerdo solemne de Dios.",sin:["alianza","convenio","promesa"]},
+"promesa":{def:"Palabra segura de Dios.",sin:["juramento","garantía"]},
+"juicio":{def:"Sentencia de Dios.",sin:["veredicto","sentencia"]},
+"salmo":{def:"Canto y oración a Dios.",sin:["himno","cántico"]},
+"ayuno":{def:"Abstinencia para buscar a Dios.",sin:["abstinencia","privación"]},
+"alabanza":{def:"Exaltación a Dios.",sin:["adoración","honra","gloria"]},
+"adoracion":{def:"Rendirse ante Dios.",sin:["alabanza","reverencia","culto"]},
+"gloria":{def:"Honra y majestad de Dios.",sin:["honor","majestad","esplendor"]},
+"honor":{def:"Respeto y dignidad.",sin:["gloria","honra","estima"]},
+"poder":{def:"Capacidad divina.",sin:["fuerza","potencia","autoridad"]},
+"autoridad":{def:"Derecho y poder delegado.",sin:["poder","mando"]},
+"libertad":{def:"Ser libre en Cristo.",sin:["liberación","independencia"]},
+"cautividad":{def:"Prisión espiritual o física.",sin:["prisión","esclavitud"]},
+"victoria":{def:"Triunfo en Cristo.",sin:["triunfo","éxito","conquista"]},
+"derrota":{def:"Pérdida, sin Dios.",sin:["fracaso","pérdida"]},
+"tentacion":{def:"Prueba que busca hacernos caer.",sin:["prueba","engaño"]},
+"prueba":{def:"Examen que purifica la fe.",sin:["tentación","examen"]},
+"persecucion":{def:"Sufrimiento por causa de Cristo.",sin:["opresión","hostigamiento"]},
+"sufrimiento":{def:"Dolor que Dios usa.",sin:["dolor","aflicción","padecimiento"]},
+"dolor":{def:"Sufrimiento físico o emocional.",sin:["aflicción","padecimiento"]},
+"enfermedad":{def:"Quebranto del cuerpo.",sin:["dolencia","mal","padecimiento"]},
+"sanidad":{def:"Restauración de Dios.",sin:["curación","salud"]},
+"salud":{def:"Bienestar dado por Dios.",sin:["sanidad","bienestar"]},
+"muerte":{def:"Salida de esta vida.",sin:["fallecimiento","partida"]},
+"resurreccion":{def:"Volver a la vida.",sin:["resurrección","vida nueva"]},
+"eternidad":{def:"Sin principio ni fin.",sin:["para siempre","perpetuidad"]},
+"tiempo":{def:"Lo que Dios ordena.",sin:["momento","época"]},
+"nuevo":{def:"Hecho por Dios, renovado.",sin:["novedad","renovado"]},
+"viejo":{def:"Lo anterior, pasado.",sin:["antiguo","anterior"]},
+"bueno":{def:"Lo que agrada a Dios.",sin:["excelente","bondadoso"]},
+"malo":{def:"Lo que se opone a Dios.",sin:["perverso","malvado"]},
+"rico":{def:"El que tiene bienes.",sin:["adinerado","acomodado"]},
+"pobre":{def:"El que carece.",sin:["necesitado","humilde"]},
+"reino":{def:"Gobierno de Dios.",sin:["imperio","dominio"]},
+"servicio":{def:"Acto de servir a Dios.",sin:["ministerio","tarea","labor"]},
+"mision":{def:"Envío de Dios.",sin:["propósito","envío","llamado"]},
+"llamado":{def:"Convocatoria de Dios.",sin:["vocación","invitación"]},
+"eleccion":{def:"Dios elige.",sin:["escogencia","designación"]},
+"pueblo":{def:"Nación de Dios.",sin:["gente","nación"]},
+"nacion":{def:"País, gente.",sin:["país","pueblo","estado"]},
+"matrimonio":{def:"Unión de hombre y mujer.",sin:["casamiento","unión"]},
+"esposo":{def:"Marido.",sin:["cónyuge","marido"]},
+"esposa":{def:"Mujer casada.",sin:["cónyuge","mujer"]},
+"padres":{def:"Papá y mamá.",sin:["progenitores","ancestros"]},
+"hijos":{def:"Descendencia.",sin:["niños","descendientes"]},
+"nino":{def:"Pequeño.",sin:["niño","pequeño","infante"]},
+"joven":{def:"Persona en juventud.",sin:["adolescente","muchacho"]},
+"anciano":{def:"Persona mayor, sabio.",sin:["viejo","mayor"]},
+"sabiduria":{def:"Conocimiento de Dios aplicado.",sin:["sabiduría","entendimiento"]},
+"entendimiento":{def:"Comprensión.",sin:["comprensión","discernimiento"]},
+"conocimiento":{def:"Saber.",sin:["saber","ciencia"]},
+"paciencia":{def:"Esperar en Dios.",sin:["tolerancia","calma"]},
+"bondad":{def:"Cualidad de Dios.",sin:["benignidad","amabilidad"]},
+"mansedumbre":{def:"Suavidad con fuerza.",sin:["humildad","docilidad"]},
+"templanza":{def:"Dominio propio.",sin:["moderación","control"]},
+"fidelidad":{def:"Ser fiel a Dios.",sin:["lealtad","constancia"]},
+"lealtad":{def:"Fidelidad.",sin:["fidelidad","honor"]},
+"confianza":{def:"Seguridad en Dios.",sin:["fe","seguridad","certeza"]},
+"seguridad":{def:"Estar seguro en Dios.",sin:["protección","confianza"]},
+"proteccion":{def:"Cuidado de Dios.",sin:["amparo","refugio","defensa"]},
+"refugio":{def:"Lugar seguro en Dios.",sin:["protección","amparo"]},
+"fortaleza":{def:"Poder para resistir.",sin:["fuerza","poder","bastión"]},
+"escudo":{def:"Defensa de Dios.",sin:["protección","defensa"]},
+"espada":{def:"Palabra de Dios.",sin:["arma"]},
+"armadura":{def:"Protección espiritual.",sin:["defensa","equipamiento"]},
+"verbo":{def:"Palabra, Cristo.",sin:["palabra","mensaje"]},
+"mensaje":{def:"Comunicación de Dios.",sin:["palabra","aviso"]},
+"evangelio":{def:"Buenas nuevas de Jesús.",sin:["buena nueva","noticia"]},
+"testimonio":{def:"Declarar lo que Dios hizo.",sin:["evidencia","declaración"]},
+"cantico":{def:"Canto espiritual.",sin:["himno","canción","salmo"]},
+"cancion":{def:"Composición musical.",sin:["cántico","melodía"]},
+"musica":{def:"Arte de sonido.",sin:["melodía","canto"]},
+"escuela":{def:"Lugar de estudio y formación.",sin:["colegio","universidad","instituto"]},
+"universidad":{def:"Estudios superiores.",sin:["facultad","escuela"]},
+"estudio":{def:"Esfuerzo por aprender.",sin:["lectura","investigación"]},
+"examen":{def:"Prueba de conocimiento.",sin:["evaluación","prueba"]},
+"profesor":{def:"El que enseña.",sin:["maestro","docente"]},
+"viaje":{def:"Traslado de un lugar a otro.",sin:["travesía","ruta","mudanza"]},
+"vacaciones":{def:"Descanso y tiempo libre.",sin:["descanso","ocio"]},
+"auto":{def:"Vehículo para trasladarse.",sin:["coche","carro","moto"]},
+"hogar":{def:"Casa, lugar donde se vive.",sin:["casa","familia"]},
+"cocina":{def:"Lugar para preparar comida.",sin:["cocinar","alimento"]},
+"comida":{def:"Alimento.",sin:["alimento","sustento","pan"]},
+"hambre":{def:"Necesidad de comer.",sin:["apetito","ansia"]},
+"sed":{def:"Necesidad de beber.",sin:["sequía","deseo"]},
+"cafe":{def:"Bebida estimulante.",sin:["café","bebida"]},
+"fruta":{def:"Alimento dulce de árbol.",sin:["fruto","manzana"]},
+"carne":{def:"Alimento animal.",sin:["alimento","comida"]},
+"bebida":{def:"Líquido para tomar.",sin:["trago","agua"]},
+"cabeza":{def:"Parte superior del cuerpo, mente.",sin:["cráneo","mente"]},
+"espalda":{def:"Parte posterior del cuerpo.",sin:["lomo","dorso"]},
+"brazo":{def:"Miembro superior.",sin:["extremidad"]},
+"pierna":{def:"Miembro inferior.",sin:["extremidad"]},
+"ojo":{def:"Órgano de la vista.",sin:["vista","mirada"]},
+"oido":{def:"Órgano del oído.",sin:["oído","escucha"]},
+"fiebre":{def:"Aumento de temperatura por enfermedad.",sin:["temperatura","malestar"]},
+"diabetes":{def:"Enfermedad por azúcar en sangre.",sin:["enfermedad","salud"]},
+"depresion":{def:"Estado de ánimo bajo y tristeza profunda.",sin:["tristeza","desánimo"]},
+"estres":{def:"Tensión por exceso de demandas.",sin:["estrés","angustia"]},
+"insomnio":{def:"Dificultad para dormir.",sin:["desvelo","vigilia"]},
+"sueno":{def:"Estado de descanso, también sueño de Dios.",sin:["dormir","descanso","visión"]},
+"pesadilla":{def:"Sueño angustiado.",sin:["miedo","terror"]},
+"abuelo":{def:"Padre de tu padre o madre.",sin:["anciano","abuelo"]},
+"abuela":{def:"Madre de tu padre o madre.",sin:["anciana"]},
+"tio":{def:"Hermano de tu padre o madre.",sin:["tío","familiar"]},
+"primo":{def:"Hijo de tu tío.",sin:["familiar","primo"]},
+"noviazgo":{def:"Relación previa al matrimonio.",sin:["novio","novia","relación"]},
+"boda":{def:"Celebración del matrimonio.",sin:["casamiento","matrimonio"]},
+"divorcio":{def:"Disolución del matrimonio.",sin:["separación","ruptura"]},
+"embarazo":{def:"Gestación de un hijo.",sin:["gestación","maternidad"]},
+"bebe":{def:"Niño muy pequeño.",sin:["bebé","infante"]},
+"adolescente":{def:"Joven entre niño y adulto.",sin:["joven","teen"]},
+"adulto":{def:"Persona mayor de edad.",sin:["maduro","grande"]},
+"funeral":{def:"Ceremonia por muerte.",sin:["sepelio","despedida"]},
+"cementerio":{def:"Lugar donde se entierra.",sin:["tumba","campo santo"]},
+"infierno":{def:"Separación eterna de Dios.",sin:["condenación","muerte eterna"]},
+"naturaleza":{def:"Creación de Dios.",sin:["creación","mundo"]},
+"arbol":{def:"Planta grande, símbolo de vida.",sin:["árbol","planta"]},
+"flor":{def:"Parte hermosa de la planta.",sin:["flor","pétalo"]},
+"jardin":{def:"Lugar con plantas y flores.",sin:["jardín","huerto"]},
+"planta":{def:"Ser vivo verde.",sin:["vegetal","árbol"]},
+"rio":{def:"Corriente natural de agua.",sin:["río","agua"]},
+"mar":{def:"Gran masa de agua salada.",sin:["océano","agua"]},
+"montaña":{def:"Elevación grande de tierra.",sin:["cerro","monte"]},
+"campo":{def:"Tierra rural, naturaleza.",sin:["finca","llanura"]},
+"ciudad":{def:"Lugar urbano poblado.",sin:["pueblo","metrópoli"]},
+"sol":{def:"Astro que da luz y calor.",sin:["luz","astro"]},
+"luna":{def:"Satélite que refleja luz.",sin:["luz nocturna"]},
+"estrella":{def:"Astro luminoso.",sin:["astro","luz"]},
+"lluvia":{def:"Agua que cae del cielo.",sin:["precipitación","agua"]},
+"tormenta":{def:"Clima fuerte con viento y lluvia.",sin:["tempestad","turbión"]},
+"viento":{def:"Aire en movimiento.",sin:["brisa","aire"]},
+"nieve":{def:"Precipitación blanca y fría.",sin:["hielo","frío"]},
+"perro":{def:"Animal doméstico leal.",sin:["can","mascota"]},
+"gato":{def:"Animal doméstico felino.",sin:["mascota","felino"]},
+"pajaro":{def:"Animal con alas y plumas.",sin:["ave","pájaro"]},
+"pez":{def:"Animal acuático.",sin:["pescado","animal"]},
+"futbol":{def:"Deporte con balón.",sin:["fútbol","deporte"]},
+"deporte":{def:"Actividad física recreativa.",sin:["juego","actividad"]},
+"arte":{def:"Expresión creativa.",sin:["pintura","música"]},
+"pintura":{def:"Obra de arte con colores.",sin:["cuadro","arte"]},
+"libro":{def:"Conjunto de páginas con contenido.",sin:["obra","texto"]},
+"lectura":{def:"Acción de leer.",sin:["estudio","comprensión"]},
+"biblia":{def:"Palabra escrita de Dios.",sin:["escritura","palabra"]},
+"corazon roto":{def:"Dolor por decepción o pérdida.",sin:["dolor","herida","tristeza"]},
+"decepcion":{def:"Sentimiento al no cumplirse esperanza.",sin:["desilusión","fracaso"]},
+"traicion":{def:"Quebrantamiento de confianza.",sin:["engaño","infidelidad"]},
+"mentira":{def:"Afirmación falsa.",sin:["falsedad","engaño"]},
+"robo":{def:"Quitar lo ajeno.",sin:["hurto","ladrón"]},
+"violencia":{def:"Uso de fuerza dañina.",sin:["agresión","abuso"]},
+"abuso":{def:"Mal uso o daño a persona.",sin:["violencia","maltrato"]},
+"accidente":{def:"Suceso dañino no planeado.",sin:["incidente","percance"]},
+"desastre":{def:"Evento que causa gran daño.",sin:["catástrofe","tragedia"]},
+"terremoto":{def:"Movimiento de la tierra.",sin:["sismo","temblor"]},
+"inundacion":{def:"Agua que cubre tierra.",sin:["diluvio","crecida"]},
+"tecnologia":{def:"Herramientas y conocimiento aplicado.",sin:["técnica","innovación"]},
+"celular":{def:"Teléfono móvil.",sin:["teléfono","móvil"]},
+"internet":{def:"Red mundial de información.",sin:["web","red"]},
+"politica":{def:"Gobierno y administración pública.",sin:["gobierno","estado"]},
+"gobierno":{def:"Autoridad que dirige nación.",sin:["autoridad","estado"]}
 };
 
 function mostrar(v){
-  document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-  document.querySelectorAll('.seccion').forEach(s=>s.classList.remove('activa'));
-  document.getElementById('sec-'+v).classList.add('activa');
+document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));
+event.target.classList.add('active');
+document.querySelectorAll('.seccion').forEach(s=>s.classList.remove('activa'));
+document.getElementById('sec-'+v).classList.add('activa');
 }
-
 function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open('bibliaMaxDB',1);r.onupgradeneeded=e=>{e.target.result.createObjectStore('verses',{keyPath:'id'})};r.onsuccess=e=>res(e.target.result);r.onerror=()=>rej()})}
 async function guardarLote(lote){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction('verses','readwrite');const st=tx.objectStore('verses');lote.forEach(v=>st.put(v));tx.oncomplete=res;tx.onerror=()=>rej()})}
 async function borrarDB(){const db=await openDB();return new Promise(res=>{const tx=db.transaction('verses','readwrite');tx.objectStore('verses').clear();tx.oncomplete=res})}
 function limpiar(t){return (t||'').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim()}
 function norm(s){return (s||'').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
-
 function normalizarLibros(json){
-  let raw = json.books || json.data?.books || json.data || json;
-  if(!Array.isArray(raw)) raw = Object.values(raw);
-  let libros=[];
-  raw.forEach((b,i)=>{
-    let capsRaw = b.chapters || b.chapter || [];
-    let caps=[];
-    for(let c of capsRaw){
-      let numCap = c.chapter_id || c.chapter || c.num || (caps.length+1);
-      let items = c.items || c.verses || [];
-      let vers=[];
-      if(Array.isArray(items)){
-        for(let it of items){
-          if(typeof it==='string'){ vers.push({verse:vers.length+1, texto:limpiar(it)}); }
-          else if(it.lines){ vers.push({verse:parseInt(it.verse_number||it.verse_numbers||vers.length+1), texto:limpiar(it.lines.join(' '))}); }
-          else if(it.text){ vers.push({verse:parseInt(it.verse_number||it.verse||vers.length+1), texto:limpiar(it.text)}); }
-        }
-      }
-      if(vers.length>0) caps.push({cap:parseInt(numCap), verses:vers});
-    }
-    if(caps.length>0){
-      let nombreCorrecto = NOMBRES[i] || (b.book_name || b.name || 'Libro '+(i+1));
-      libros.push({nombre:nombreCorrecto, caps});
-    }
-  });
-  return libros;
+let raw=json.books||json.data?.books||json.data||json;
+if(!Array.isArray(raw)) raw=Object.values(raw);
+let libros=[];
+raw.forEach((b,i)=>{
+let capsRaw=b.chapters||b.chapter||[];
+let caps=[];
+for(let c of capsRaw){
+let numCap=c.chapter_id||c.chapter||c.num||(caps.length+1);
+let items=c.items||c.verses||[];
+let vers=[];
+if(Array.isArray(items)){
+for(let it of items){
+if(typeof it==='string'){vers.push({verse:vers.length+1,texto:limpiar(it)});}
+else if(it.lines){vers.push({verse:parseInt(it.verse_number||it.verse_numbers||vers.length+1),texto:limpiar(it.lines.join(' '))});}
+else if(it.text){vers.push({verse:parseInt(it.verse_number||it.verse||vers.length+1),texto:limpiar(it.text)});}
 }
-
+if(vers.length>0) caps.push({cap:parseInt(numCap),verses:vers});
+}
+if(caps.length>0){
+let nombreCorrecto=NOMBRES[i]||(b.book_name||b.name||'Libro '+(i+1));
+libros.push({nombre:nombreCorrecto,caps});
+}
+});
+return libros;
+}
 async function descargarBiblia(){
-  let barra=document.getElementById('barraLlena'), prog=document.getElementById('progreso');
-  prog.textContent='Descargando...';
-  barra.style.width='10%';
-  try{
-    let url='https://mrk214.github.io/snapshots/es___spa___spa/RVR1960_vid_149.json';
-    let resp=await fetch(url);
-    let json=await resp.json();
-    estructuraLibros=normalizarLibros(json);
-    await borrarDB();
-    todosLosVersiculos=[];
-    let lote=[]; let total=estructuraLibros.reduce((s,l)=>s+l.caps.reduce((a,c)=>a+c.verses.length,0),0);
-    let hechos=0;
-    for(let lib of estructuraLibros){
-      for(let cap of lib.caps){
-        for(let v of cap.verses){
-          let ref=`${lib.nombre} ${cap.cap}:${v.verse}`;
-          let obj={id:ref, book:lib.nombre, chapter:cap.cap, verse:v.verse, texto:v.texto, ref};
-          lote.push(obj); todosLosVersiculos.push(obj);
-          hechos++;
-          if(lote.length>=500){ await guardarLote(lote); lote=[]; }
-        }
-      }
-      barra.style.width=Math.round(hechos/total*100)+'%';
-      prog.textContent=`Guardando ${lib.nombre}...`;
-    }
-    if(lote.length) await guardarLote(lote);
-    prog.textContent='✅ RVR1960 lista. Ya podés hablar con LOGOS.';
-    barra.style.width='100%';
-    document.getElementById('estadoDescarga').textContent='✅ Biblia RVR1960 descargada';
-  }catch(e){ prog.textContent='❌ Error. Tocá de nuevo.'; }
+let barra=document.getElementById('barraLlena'),prog=document.getElementById('progreso');
+prog.textContent='Descargando...';
+barra.style.width='10%';
+try{
+let url='https://mrk214.github.io/snapshots/es___spa___spa/RVR1960_vid_149.json';
+let resp=await fetch(url);
+let json=await resp.json();
+let estructuraLibros=normalizarLibros(json);
+await borrarDB();
+todosLosVersiculos=[];
+let lote=[];let total=estructuraLibros.reduce((s,l)=>s+l.caps.reduce((a,c)=>a+c.verses.length,0),0);
+let hechos=0;
+for(let lib of estructuraLibros){
+for(let cap of lib.caps){
+for(let v of cap.verses){
+let ref=`${lib.nombre} ${cap.cap}:${v.verse}`;
+let obj={id:ref,book:lib.nombre,chapter:cap.cap,verse:v.verse,texto:v.texto,ref};
+lote.push(obj);todosLosVersiculos.push(obj);
+hechos++;
+if(lote.length>=500){await guardarLote(lote);lote=[];}
 }
-
+barra.style.width=Math.round(hechos/total*100)+'%';
+prog.textContent=`Guardando ${lib.nombre}...`;
+}
+if(lote.length) await guardarLote(lote);
+prog.textContent='✅ RVR1960 lista. Ya podés hablar con LOGOS.';
+barra.style.width='100%';
+document.getElementById('estadoDescarga').textContent='✅ Biblia RVR1960 descargada';
+}catch(e){prog.textContent='❌ Error. Tocá de nuevo.';}
+}
 async function cargarDesdeDB(){
-  try{
-    const db=await openDB();
-    let req=db.transaction('verses','readonly').objectStore('verses').getAll();
-    let data=await new Promise(res=>{req.onsuccess=()=>res(req.result)});
-    if(data && data.length>1000){
-      todosLosVersiculos=data;
-      document.getElementById('estadoDescarga').textContent='✅ Biblia RVR1960 cargada';
-    }
-  }catch(e){}
+try{
+const db=await openDB();
+let req=db.transaction('verses','readonly').objectStore('verses').getAll();
+let data=await new Promise(res=>{req.onsuccess=()=>res(req.result)});
+if(data&&data.length>1000){
+todosLosVersiculos=data;
+document.getElementById('estadoDescarga').textContent='✅ Biblia RVR1960 cargada';
+}
+}catch(e){}
 }
 cargarDesdeDB();
-
 function versiculoPorRef(refBuscado){
-  let m=refBuscado.match(/(.+?)\s*(\d+):(\d+)/);
-  if(!m) return null;
-  let lt=norm(m[1]), cap=+m[2], ver=+m[3];
-  return todosLosVersiculos.find(v=> norm(v.book).includes(lt) && v.chapter===cap && v.verse===ver);
+let m=refBuscado.match(/(.+?)\s*(\d+):(\d+)/);
+if(!m) return null;
+let lt=norm(m[1]),cap=+m[2],ver=+m[3];
+return todosLosVersiculos.find(v=>norm(v.book).includes(lt)&&v.chapter===cap&&v.verse===ver);
 }
-
 function detectarTemas(texto){
-  let t=norm(texto);
-  let encontrados=[];
-  for(let k in TEMAS){
-    let score=0;
-    TEMAS[k].p.forEach(p=>{if(t.includes(p)) score+=2});
-    if(score>0) encontrados.push({tema:k,score});
-  }
-  encontrados.sort((a,b)=>b.score-a.score);
-  return encontrados.map(e=>e.tema);
+let t=norm(texto);
+let encontrados=[];
+for(let k in TEMAS){
+let score=0;
+TEMAS[k].p.forEach(p=>{if(t.includes(p)) score+=2});
+if(score>0) encontrados.push({tema:k,score});
 }
-
-function agregarChat(quien, html){
-  let chat=document.getElementById('chat');
-  let div=document.createElement('div');
-  div.className='msg '+quien;
-  div.innerHTML=html;
-  chat.appendChild(div);
-  chat.scrollTop=chat.scrollHeight;
+encontrados.sort((a,b)=>b.score-a.score);
+return encontrados.map(e=>e.tema);
 }
-
+function esSaludo(t){return /^\s*(hola|buenas|buen dia|buenas tardes|buenas noches|hey|que tal|como estas|hi|hello)\b/i.test(t);}
+function esGracias(t){return /gracias|thank/i.test(norm(t));}
+function esAdios(t){return /adios|chao|hasta luego|nos vemos/i.test(norm(t));}
+function agregarChat(quien,html){
+let chat=document.getElementById('chat');
+let div=document.createElement('div');
+div.className='msg '+quien;
+div.innerHTML=html;
+chat.appendChild(div);
+chat.scrollTop=chat.scrollHeight;
+}
 function enviarSugerencia(t){document.getElementById('input').value=t;enviar()}
-async function enviar(){
-  let consulta=document.getElementById('input').value.trim();
-  if(!consulta) return;
-  if(todosLosVersiculos.length===0){alert('Primero descargá la Biblia RVR1960');return}
-  document.getElementById('input').value='';
-  agregarChat('user', consulta);
 
-  let temas=detectarTemas(consulta);
-  let refs=[];
-  temas.forEach(t=>{ TEMAS[t].vers.forEach(r=>{ if(!refs.includes(r)) refs.push(r); })});
-  if(refs.length===0) refs=['Juan 3:16','Salmos 23:1','Romanos 8:28'];
+function generarRespuestaLocal(temas,consulta){
+if(esSaludo(consulta)){
+return `<b>LOGOS IA</b><br>Hola, ¿cómo andás? Me alegra verte por acá.<br><br>¿Querés que estudiemos algo o me contás qué te está pasando? Estoy para escucharte y llevarlo a la Palabra.`;
+}
+if(esGracias(consulta)){
+return `<b>LOGOS IA</b><br>De nada, para eso estoy.<br><br>¿Seguimos? Contame qué otro tema te preocupa.`;
+}
+if(esAdios(consulta)){
+return `<b>LOGOS IA</b><br>Nos vemos, que Dios te guarde.<br><br>Vuelvo a estar acá cuando me necesites.`;
+}
+if(temas.length===0){
+if(ultimoTema){
+temas=[ultimoTema];
+return `<b>LOGOS IA</b><br>Te sigo en lo que veníamos hablando de ${ultimoTema}.<br><br>`+versesHtml(ultimoTema)+`<br><b>Para hoy:</b> ¿Querés contarme un poco más de eso? Así lo llevamos más profundo a la Biblia.`;
+}
+return `<b>LOGOS IA</b><br>Te entiendo. Contame un poco más.<br><br>¿Es miedo, plata, familia, perdón, futuro? Con eso te traigo la Palabra exacta.`;
+}
+ultimoTema=temas[0];
+let tema=temas[0];
+let intro="";
+if(tema==='ansiedad') intro=`La ansiedad te come por dentro y no te deja descansar. Lo entiendo. La Biblia no te dice que no sientas nada, te dice a dónde llevarlo.`;
+else if(tema==='economia') intro=`La plata preocupa, y más cuando no alcanza. Dios no promete que te sobra, promete que te sustenta. Esa es la diferencia.`;
+else if(tema==='tristeza') intro=`Cuando estás triste, lo último que necesitás es un discurso. Necesitás verdad que te abrace. Acá va.`;
+else if(tema==='perdon') intro=`Perdonar es lo más difícil y lo más liberador. No es decir que está bien lo que te hicieron, es soltarlo para que no te controle más.`;
+else if(tema==='fe') intro=`La fe no es no tener dudas, es llevar las dudas a Dios. Mirá esto.`;
+else if(tema==='muerte') intro=`La muerte duele, y duele porque amamos. La esperanza no quita el dolor, lo sostiene.`;
+else if(tema==='familia') intro=`La familia es el primer campo de batalla y de amor. La Biblia tiene mucho para decir ahí.`;
+else if(tema==='oracion') intro=`Orar no es un ritual, es hablar con tu Padre. Esto dice la Palabra.`;
+else if(tema==='tentacion') intro=`La tentación es real y golpea fuerte. Pero hay salida, y la Biblia la marca.`;
+else if(tema==='proposito') intro=`Sentir que no sabés para qué estás es más común de lo que creés. Dios sí sabe.`;
+else if(tema==='salud') intro=`Cuando el cuerpo duele, todo se desordena. Dios ve eso y tiene palabra para tu salud.`;
+else if(tema==='amor') intro=`El amor y la soledad van de la mano muchas veces. Esto dice Dios sobre eso.`;
+else intro=`Vamos a lo que dice la Palabra, no a lo que dice la gente.`;
 
-  let seleccion=[];
-  for(let r of refs){
-    let v=versiculoPorRef(r);
-    if(v &&!seleccion.find(s=>s.ref===v.ref)) seleccion.push(v);
-    if(seleccion.length>=3) break;
-  }
-
-  let apiKey=document.getElementById('apiKey').value.trim();
-  if(apiKey){
-    agregarChat('ia','<i>Estudiando la Biblia para responderte...</i>');
-    try{
-      let contextoVersiculos = seleccion.map(v=>`${v.ref}: "${v.texto}"`).join('\n');
-      let systemPrompt = `Sos LOGOS IA, un asistente cristiano evangélico. Hablás en español rioplatense, con vos, natural, cercano, sin ser pesado. Estilo directo, inteligente, con calidez. Nunca inventás versículos. Siempre citás Reina-Valera 1960. Explicás el contexto y la aplicación práctica a problemas actuales. Si el usuario pide estudiar una cita, das: texto, contexto histórico, significado y aplicación. Respondé como un amigo cristiano maduro, no como predicador. Máximo 250 palabras.`;
-      let userPrompt = `Problema/consulta del usuario: ${consulta}\n\nVersículos relevantes que encontré en RVR1960:\n${contextoVersiculos}\n\nRespondé usando esos versículos y la Biblia. No inventes citas.`;
-      let res=await fetch('https://api.openai.com/v1/chat/completions',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer '+apiKey},
-        body:JSON.stringify({model:'gpt-4o-mini',messages:[{role:'system',content:systemPrompt},{role:'user',content:userPrompt}],temperature:0.7,max_tokens:400})
-      });
-      let data=await res.json();
-      let respuesta=data.choices[0].message.content;
-      document.querySelector('#chat.msg.ia:last-child')?.remove();
-      let html=`<b>LOGOS IA</b><br>${respuesta}<br><br>`;
-      seleccion.forEach(v=>{
-        html+=`<div class="verso-card" onclick="abrirModal('${v.ref}')"><small>${v.ref} tocame para ir al libro</small><br>"${v.texto}"</div>`;
-      });
-      agregarChat('ia', html);
-    }catch(e){
-      document.querySelector('#chat.msg.ia:last-child')?.remove();
-      agregarChat('ia', generarRespuestaLocal(consulta, temas, seleccion));
-    }
-  } else {
-    agregarChat('ia', generarRespuestaLocal(consulta, temas, seleccion));
-  }
+return `<b>LOGOS IA</b><br>${intro}<br><br>`+versesHtml(tema)+`<br><b>Para hoy:</b> Leé esos versículos despacio, dos veces. Elegí uno y repetilo cuando venga el pensamiento. Eso es llevar la Biblia a la práctica.<br><br>¿Querés que estudiemos ${versiculoPorRef(TEMAS[tema].vers[0])?TEMAS[tema].vers[0]:'ese versículo'} palabra por palabra?`;
+}
+function versesHtml(tema){
+let refs=TEMAS[tema].vers;
+let html="";
+for(let r of refs){
+let v=versiculoPorRef(r);
+if(v) html+=`<div class="verso-card" onclick="abrirModal('${v.ref}')"><small>${v.ref}</small><br>"${v.texto}"</div>`;
+}
+return html;
 }
 
-function generarRespuestaLocal(consulta, temas, seleccion){
-  if(temas.length===0){
-    return `<b>LOGOS IA</b><br>Te entiendo. No tengo todavía claro el tema, pero acá tenés algo sólido para hoy:<br><br>`+
-    seleccion.map(v=>`<div class="verso-card" onclick="abrirModal('${v.ref}')"><small>${v.ref}</small><br>"${v.texto}"</div>`).join('')+
-    `<br>Si querés estudio profundo, andá a la pestaña Estudio y pegá la cita.`;
-  }
-  let tema=temas[0];
-  let intro="";
-  if(tema==='ansiedad') intro=`Mirá, la ansiedad te come por dentro y no te deja descansar. Eso lo entiendo. La Biblia no te dice que no sientas nada, te dice a dónde llevarlo.`;
-  else if(tema==='economia') intro=`La plata preocupa, y más cuando no alcanza. Dios no promete que te sobra, promete que te sustenta. Esa es la diferencia.`;
-  else if(tema==='tristeza') intro=`Cuando estás triste, lo último que necesitás es un discurso. Necesitás que alguien te abrace con verdad. Acá va.`;
-  else if(tema==='perdon') intro=`Perdonar es lo más difícil y lo más liberador. No es decir que está bien lo que te hicieron, es soltarlo para que no te controle más.`;
-  else if(tema==='fe') intro=`La fe no es no tener dudas, es llevar las dudas a Dios. Mirá esto.`;
-  else if(tema==='muerte') intro=`La muerte duele, y duele porque amamos. La esperanza no quita el dolor, lo sostiene.`;
-  else intro=`Te entiendo. Vamos a lo que dice la Palabra, no a lo que dice la gente.`;
+async function enviar(){
+let consulta=document.getElementById('input').value.trim();
+if(!consulta) return;
+if(todosLosVersiculos.length===0){alert('Primero descargá la Biblia RVR1960');return}
+document.getElementById('input').value='';
+agregarChat('user',consulta);
+conversacion.push({role:'user',content:consulta});
 
-  let html=`<b>LOGOS IA</b><br>${intro}<br><br>`;
-  seleccion.forEach(v=>{
-    html+=`<div class="verso-card" onclick="abrirModal('${v.ref}')"><small>${v.ref} tocame para ir al libro</small><br>"${v.texto}"</div>`;
-  });
-  html+=`<br><b>Para hoy:</b> leé esos versículos despacio, dos veces. Elegí uno y repetilo cuando venga el pensamiento. Eso es llevar la Biblia a la práctica.`;
-  return html;
+let temas=detectarTemas(consulta);
+let respuestaHtml=generarRespuestaLocal(temas,consulta);
+conversacion.push({role:'assistant',content:respuestaHtml.replace(/<[^>]*>/g,'').slice(0,200)});
+agregarChat('ia',respuestaHtml);
 }
 
 function abrirModal(ref){
-  let v=versiculoPorRef(ref);
-  if(!v) return;
-  document.getElementById('modalRef').textContent=v.ref;
-  document.getElementById('modalTexto').textContent='"'+v.texto+'"';
-  document.getElementById('modal').style.display='block';
+let v=versiculoPorRef(ref);
+if(!v) return;
+document.getElementById('modalRef').textContent=v.ref;
+document.getElementById('modalTexto').textContent='"'+v.texto+'"';
+document.getElementById('modal').style.display='block';
 }
 function cerrarModal(){document.getElementById('modal').style.display='none'}
 
-function hacerEstudio(){
-  let raw=document.getElementById('estudioInput').value.trim();
-  if(!raw) return;
-  if(todosLosVersiculos.length===0){alert('Descargá primero la Biblia');return}
-  let m=raw.match(/(.+?)\s*(\d+):(\d+)/);
-  if(!m){alert('Formato: Juan 3:16');return}
-  let v=versiculoPorRef(raw);
-  if(!v){alert('No encontré esa cita en RVR1960');return}
-
-  let contexto = `Este versículo está en ${v.book}. Es parte de un capítulo de ${v.chapter} versículos.`;
-  let palabraOriginal = "";
-  if(norm(v.book).includes('juan') && v.chapter===3 && v.verse===16) palabraOriginal=`<b>Palabra clave:</b> "Amó" en griego es <i>agapao</i>, amor incondicional, el que da sin esperar nada. No es un sentimiento, es una decisión.`;
-  else if(norm(v.book).includes('salmos') && v.chapter===23 && v.verse===1) palabraOriginal=`<b>Palabra clave:</b> "Nada me faltará" en hebreo implica contentamiento total, no abundancia.`;
-  else palabraOriginal=`<b>Consejo:</b> buscá en una concordancia la palabra principal del versículo para ver dónde más aparece.`;
-
-  let html=`<div class="verso-card" style="margin-top:14px"><small>${v.ref} - Reina-Valera 1960</small><br><b>"${v.texto}"</b><br><br>${contexto}<br><br>${palabraOriginal}<br><br><b>Aplicación:</b> ¿Qué te está diciendo Dios hoy con esto? Escribilo en una oración y orá sobre eso esta noche.</div>`;
-  document.getElementById('resultadoEstudio').innerHTML=html;
+function limpiarPalabra(p){return (p||'').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zñ]/g,'');}
+async function significadoDe(palabra){
+let limpia=limpiarPalabra(palabra);
+if(!limpia) return {def:"Palabra vacía",fuente:"-"};
+if(DICC[limpia]) return {def:DICC[limpia].def,fuente:"LOGOS"};
+try{
+let res=await fetch(`https://api.dictionaryapi.dev/api/v2/entries/es/${encodeURIComponent(limpia)}`);
+let data=await res.json();
+if(Array.isArray(data)&&data[0]&&data[0].meanings){
+let defs=[];
+for(let m of data[0].meanings){
+for(let d of m.definitions){defs.push(d.definition);if(defs.length>=3) break;}
+if(defs.length>=3) break;
+}
+if(defs.length>0) return {def:defs.join(" | "),fuente:"Diccionario Español"};
+}
+}catch(e){}
+return {def:"Palabra en contexto RVR1960. No está en el diccionario local.",fuente:"-"};
+}
+async function mostrarPalabra(palabraOriginal){
+let limpia=limpiarPalabra(palabraOriginal);
+let panel=document.getElementById('panelPalabra');
+panel.style.display='block';
+panel.innerHTML=`<h4>📖 Cargando "${palabraOriginal}"...</h4>`;
+panel.scrollIntoView({behavior:'smooth'});
+let info=await significadoDe(palabraOriginal);
+let sinList=DICC[limpia]?DICC[limpia].sin:[];
+let html=`<h4>📖 ${palabraOriginal} → ${limpia}</h4><p><b>Significado:</b> ${info.def} <small>[${info.fuente}]</small></p>`;
+if(sinList.length>0){
+html+=`<b>Sinónimos con significado:</b>`;
+for(let s of sinList){
+let si=await significadoDe(s);
+html+=`<div class="verso-card" style="margin:6px 0" onclick="mostrarPalabra('${s}')"><small>${s}</small><br>${si.def}</div>`;
+}
+}else{
+html+=`<p style="color:#aaa;margin-top:6px">Tocá otra palabra dorada del versículo. Cada una tiene su estudio.</p>`;
+}
+panel.innerHTML=html;
 }
 
-document.getElementById('input').addEventListener('keypress', e=>{ if(e.key==='Enter') enviar() });
-document.getElementById('estudioInput').addEventListener('keypress', e=>{ if(e.key==='Enter') hacerEstudio() });
+function hacerEstudio(){
+let raw=document.getElementById('estudioInput').value.trim();
+if(!raw) return;
+if(todosLosVersiculos.length===0){alert('Descargá primero la Biblia');return}
+let v=versiculoPorRef(raw);
+if(!v){alert('No encontré esa cita en RVR1960');return}
+let palabras=v.texto.split(/\s+/).map(p=>`<span class="palabra" onclick="mostrarPalabra('${p.replace(/'/g,"")}')">${p}</span>`).join(' ');
+let html=`<div class="verso-card" style="margin-top:14px">
+<small>${v.ref} - Reina-Valera 1960</small><br>
+<div style="font-size:18px;line-height:2;margin:10px 0">${palabras}</div>
+<b>Contexto:</b> Este versículo está en ${v.book}, capítulo ${v.chapter}.<br><br>
+<b>Aplicación:</b> ¿Qué te dice Dios hoy con esto? Escribilo en una oración.<br><br>
+<b>Oración sugerida:</b> Señor, hacé real en mi vida lo que dice ${v.ref}. Amén.
+</div>`;
+document.getElementById('resultadoEstudio').innerHTML=html;
+document.getElementById('panelPalabra').style.display='none';
+}
+
+document.getElementById('input').addEventListener('keypress',e=>{if(e.key==='Enter') enviar()});
+document.getElementById('estudioInput').addEventListener('keypress',e=>{if(e.key==='Enter') hacerEstudio()});
 </script>
 </body>
-  </html>
+</html>
