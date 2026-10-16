@@ -507,7 +507,7 @@ if(!m) return null;
 let lt=norm(m[1]),cap=+m[2],ver=+m[3];
 return todosLosVersiculos.find(v=>norm(v.book).includes(lt)&&v.chapter===cap&&v.verse===ver);
 }
-  function detectarTemas(texto){
+function detectarTemas(texto){
 let t=norm(texto);
 let encontrados=[];
 for(let k in TEMAS){
