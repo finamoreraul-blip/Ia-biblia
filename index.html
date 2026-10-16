@@ -516,8 +516,16 @@ TEMAS[k].p.forEach(p=>{if(t.includes(p)) score+=2});
 if(score>0) encontrados.push({tema:k,score});
 }
 encontrados.sort((a,b)=>b.score-a.score);
-return encontrados.map(e=>e.tema);
+if(encontrados.length>0) return encontrados.map(e=>e.tema);
+let palabras=t.split(/\s+/).filter(w=>w.length>3 &&!['para','con','como','pero','sobre','tengo','siento','estoy','quiero','hace','hacer'].includes(w));
+for(let w of palabras){
+let v=todosLosVersiculos.find(x=>norm(x.texto).includes(w));
+if(v){
+if(!TEMAS['busq_'+w]) TEMAS['busq_'+w]={p:[w],vers:[v.ref]};
+return ['busq_'+w];
 }
+return [];
+} 
 function esSaludo(t){return /^\s*(hola|buenas|buen dia|buenas tardes|buenas noches|hey|que tal|como estas|hi|hello)\b/i.test(t);}
 function esGracias(t){return /gracias|thank/i.test(norm(t));}
 function esAdios(t){return /adios|chao|hasta luego|nos vemos/i.test(norm(t));}
@@ -530,7 +538,6 @@ chat.appendChild(div);
 chat.scrollTop=chat.scrollHeight;
 }
 function enviarSugerencia(t){document.getElementById('input').value=t;enviar()}
-
 function generarRespuestaLocal(temas,consulta){
 if(esSaludo(consulta)){
 return `<b>LOGOS IA</b><br>Hola, ¿cómo andás? Me alegra verte por acá.<br><br>¿Querés que estudiemos algo o me contás qué te está pasando? Estoy para escucharte y llevarlo a la Palabra.`;
@@ -543,30 +550,50 @@ return `<b>LOGOS IA</b><br>Nos vemos, que Dios te guarde.<br><br>Vuelvo a estar 
 }
 if(temas.length===0){
 if(ultimoTema){
-temas=[ultimoTema];
 return `<b>LOGOS IA</b><br>Te sigo en lo que veníamos hablando de ${ultimoTema}.<br><br>`+versesHtml(ultimoTema)+`<br><b>Para hoy:</b> ¿Querés contarme un poco más de eso? Así lo llevamos más profundo a la Biblia.`;
 }
 return `<b>LOGOS IA</b><br>Te entiendo. Contame un poco más.<br><br>¿Es miedo, plata, familia, perdón, futuro? Con eso te traigo la Palabra exacta.`;
+}
+if(temas[0].startsWith('busq_')){
+let palabra=temas[0].replace('busq_','');
+ultimoTema=temas[0];
+return `<b>LOGOS IA</b><br>Encontré tu palabra "<b>${palabra}</b>" en la Biblia:<br><br>`+versesHtml(temas[0])+`<br><b>Para hoy:</b> Leé ese versículo despacio, dos veces. ¿Querés que lo estudiemos palabra por palabra en Estudio?`;
 }
 ultimoTema=temas[0];
 let tema=temas[0];
 let intro="";
 if(tema==='ansiedad') intro=`La ansiedad te come por dentro y no te deja descansar. Lo entiendo. La Biblia no te dice que no sientas nada, te dice a dónde llevarlo.`;
-else if(tema==='economia') intro=`La plata preocupa, y más cuando no alcanza. Dios no promete que te sobra, promete que te sustenta. Esa es la diferencia.`;
-else if(tema==='tristeza') intro=`Cuando estás triste, lo último que necesitás es un discurso. Necesitás verdad que te abrace. Acá va.`;
-else if(tema==='perdon') intro=`Perdonar es lo más difícil y lo más liberador. No es decir que está bien lo que te hicieron, es soltarlo para que no te controle más.`;
-else if(tema==='fe') intro=`La fe no es no tener dudas, es llevar las dudas a Dios. Mirá esto.`;
+else if(tema==='economia' || tema==='deuda') intro=`La plata preocupa, y más cuando no alcanza. Dios no promete que te sobra, promete que te sustenta. Esa es la diferencia.`;
+else if(tema==='tristeza' || tema==='afliccion' || tema==='sufrimiento') intro=`Cuando estás triste, lo último que necesitás es un discurso. Necesitás verdad que te abrace. Acá va.`;
+else if(tema==='perdon' || tema==='culpa' || tema==='arrepentimiento') intro=`Perdonar es lo más difícil y lo más liberador. No es decir que está bien lo que te hicieron, es soltarlo para que no te controle más.`;
+else if(tema==='fe' || tema==='esperanza') intro=`La fe no es no tener dudas, es llevar las dudas a Dios. Mirá esto.`;
 else if(tema==='muerte') intro=`La muerte duele, y duele porque amamos. La esperanza no quita el dolor, lo sostiene.`;
-else if(tema==='familia') intro=`La familia es el primer campo de batalla y de amor. La Biblia tiene mucho para decir ahí.`;
-else if(tema==='oracion') intro=`Orar no es un ritual, es hablar con tu Padre. Esto dice la Palabra.`;
-else if(tema==='tentacion') intro=`La tentación es real y golpea fuerte. Pero hay salida, y la Biblia la marca.`;
-else if(tema==='proposito') intro=`Sentir que no sabés para qué estás es más común de lo que creés. Dios sí sabe.`;
-else if(tema==='salud') intro=`Cuando el cuerpo duele, todo se desordena. Dios ve eso y tiene palabra para tu salud.`;
-else if(tema==='amor') intro=`El amor y la soledad van de la mano muchas veces. Esto dice Dios sobre eso.`;
+else if(tema==='familia' || tema==='matrimonio' || tema==='hijos' || tema==='boda' || tema==='embarazo') intro=`La familia es el primer campo de batalla y de amor. La Biblia tiene mucho para decir ahí.`;
+else if(tema==='oracion' || tema==='adoracion' || tema==='ayuno') intro=`Orar no es un ritual, es hablar con tu Padre. Esto dice la Palabra.`;
+else if(tema==='tentacion' || tema==='pecado' || tema==='santidad' || tema==='obediencia') intro=`La tentación es real y golpea fuerte. Pero hay salida, y la Biblia la marca.`;
+else if(tema==='proposito' || tema==='decision' || tema==='guia') intro=`Sentir que no sabés para qué estás es más común de lo que creés. Dios sí sabe.`;
+else if(tema==='salud' || tema==='sanidad' || tema==='cansancio') intro=`Cuando el cuerpo duele, todo se desordena. Dios ve eso y tiene palabra para tu salud.`;
+else if(tema==='amor' || tema==='soledad' || tema==='abandono') intro=`El amor y la soledad van de la mano muchas veces. Esto dice Dios sobre eso.`;
+else if(tema==='trabajo' || tema==='escuela') intro=`El trabajo y el estudio cansan, pero son parte del propósito. Mirá lo que dice Dios.`;
+else if(tema==='ira' || tema==='enemistad' || tema==='persecucion' || tema==='guerra') intro=`Hay conflictos que duelen y enojan. La Biblia te enseña cómo pelear sin destruirte.`;
+else if(tema==='paz' || tema==='consuelo' || tema==='fortaleza' || tema==='valentia' || tema==='libertad' || tema==='victoria') intro=`Esto es para hoy, no para el domingo. Fuerza real para lo que estás viviendo.`;
+else if(tema==='gracia' || tema==='misericordia' || tema==='salvacion' || tema==='restauracion' || tema==='reconciliacion') intro=`Esto es puro evangelio, lo que Dios hace por vos sin que lo merezcas.`;
+else if(tema==='poder' || tema==='proteccion' || tema==='milagro') intro=`El poder de Dios no es teoría, es refugio real. Acá está.`;
+else if(tema==='sabiduria' || tema==='iglesia' || tema==='servicio' || tema==='evangelismo' || tema==='comunion' || tema==='unidad') intro=`Vamos a lo que dice la Palabra, no a lo que dice la gente.`;
+else if(tema==='gratitud' || tema==='alegria' || tema==='bendicion' || tema==='prosperidad' || tema==='generosidad' || tema==='contentamiento') intro=`Qué bueno que lo podés ver. La gratitud abre más puertas que la queja.`;
+else if(tema==='humildad' || tema==='paciencia' || tema==='bondad' || tema==='mansedumbre' || tema==='templanza' || tema==='fidelidad') intro=`El fruto del Espíritu se nota en lo cotidiano. Esto te ayuda a cultivarlo.`;
+else if(tema==='justicia' || tema==='verdad' || tema==='corazonroto' || tema==='verguenza') intro=`Cuando te mienten, te traicionan o te humillan, Dios ve tu corazón. Esto es para vos.`;
+else if(tema==='demonio' || tema==='angel' || tema==='espiritu' || tema==='cuerpo') intro=`Lo espiritual es real. La Biblia lo explica sin miedo y sin locura.`;
+else if(tema==='joven' || tema==='anciano') intro=`Cada etapa tiene su desafío y su promesa. Esto es para tu momento.`;
+else if(tema==='politica' || tema==='tecnologia' || tema==='viaje' || tema==='hogar' || tema==='comida' || tema==='naturaleza' || tema==='animal' || tema==='deporte' || tema==='biblia' || tema==='accidente' || tema==='clima') intro=`Dios está en todo, también en esto que me contás. Mirá lo que dice.`;
 else intro=`Vamos a lo que dice la Palabra, no a lo que dice la gente.`;
-
-return `<b>LOGOS IA</b><br>${intro}<br><br>`+versesHtml(tema)+`<br><b>Para hoy:</b> Leé esos versículos despacio, dos veces. Elegí uno y repetilo cuando venga el pensamiento. Eso es llevar la Biblia a la práctica.<br><br>¿Querés que estudiemos ${versiculoPorRef(TEMAS[tema].vers[0])?TEMAS[tema].vers[0]:'ese versículo'} palabra por palabra?`;
+let refs=TEAMS_REF(tema);
+return `<b>LOGOS IA</b><br>${intro}<br><br>`+versesHtml(tema)+`<br><b>Para hoy:</b> Leé esos versículos despacio, dos veces. Elegí uno y repetilo cuando venga el pensamiento. Eso es llevar la Biblia a la práctica.<br><br>¿Querés que estudiemos ${refs} palabra por palabra?`;
 }
+function TEAMS_REF(t){
+if(!TEMAS[t] ||!TEMAS[t].vers || TEMAS[t].vers.length===0) return 'ese versículo';
+return TEMAS[t].vers[0];
+  }
 function versesHtml(tema){
 let refs=TEMAS[tema].vers;
 let html="";
