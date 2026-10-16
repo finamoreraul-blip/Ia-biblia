@@ -507,7 +507,7 @@ if(!m) return null;
 let lt=norm(m[1]),cap=+m[2],ver=+m[3];
 return todosLosVersiculos.find(v=>norm(v.book).includes(lt)&&v.chapter===cap&&v.verse===ver);
 }
-function detectarTemas(texto){
+  function detectarTemas(texto){
 let t=norm(texto);
 let encontrados=[];
 for(let k in TEMAS){
@@ -525,7 +525,7 @@ if(!TEMAS['busq_'+w]) TEMAS['busq_'+w]={p:[w],vers:[v.ref]};
 return ['busq_'+w];
 }
 return [];
-} 
+}
 function esSaludo(t){return /^\s*(hola|buenas|buen dia|buenas tardes|buenas noches|hey|que tal|como estas|hi|hello)\b/i.test(t);}
 function esGracias(t){return /gracias|thank/i.test(norm(t));}
 function esAdios(t){return /adios|chao|hasta luego|nos vemos/i.test(norm(t));}
